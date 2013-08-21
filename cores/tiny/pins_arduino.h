@@ -38,6 +38,12 @@
 #define PORT_D_ID 4
 #endif
 
+#if defined( __AVR_ATtiny1634__ )
+#define PORT_A_ID 1
+#define PORT_B_ID 2
+#define PORT_C_ID 3
+#endif
+
 #if defined( __AVR_ATtinyX4__ )
 #define PORT_A_ID 1
 #define PORT_B_ID 2
@@ -110,6 +116,13 @@ extern const uint8_t PROGMEM digital_pin_to_timer_PGM[];
 #define digitalPinToPCICRbit(p) digitalPinToPCX( p, PCIE2,   PCIE1,   PCIE2,   PCIE0,   0    )
 #define digitalPinToPCMSK(p)    digitalPinToPCX( p, &PCMSK2, &PCMSK1, &PCMSK2, &PCMSK0, NULL )
 #define digitalPinToPCMSKbit(p) digitalPinToPCX( p, p,       3-p,     p-2,     p-9,     0    )
+#endif
+
+#if defined(__AVR_ATtiny1634__)
+#define digitalPinToPCICR(p)    (((p) >= 0 && (p) <= 17) ? (&GIMSK) : ((uint8_t *)NULL))
+#define digitalPinToPCICRbit(p) (((p) <= 7) ? PCIE0 : (((p) <= 11) ? PCIE1 : PCIE2))
+#define digitalPinToPCMSK(p)    (((p) <= 7) ? (&PCMSK0) : (((p) <= 11) ? (&PCMSK1) : (((p) <= 17) ? (&PCMSK2) : ((uint8_t *)NULL))))
+#define digitalPinToPCMSKbit(p) (((p) <= 7) ? (p) : (((p) <= 11) ? ((p) - 8) : ((p) - 12)))
 #endif
 
 #endif

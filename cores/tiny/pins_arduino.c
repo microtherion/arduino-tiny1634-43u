@@ -159,6 +159,123 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] =
 
 #endif
 
+#if defined( __AVR_ATtiny1634__ )
+
+// On the Arduino board, digital pins are also used
+// for the analog output (software PWM).  Analog input
+// pins are a separate set.
+
+// ATMEL ATTINY1634
+//
+//                   +-\/-+
+// TX0  (D  8) PB0  1|    |29  PB1 (D   9)  RX1
+// RX0  (D  7) PA7  2|    |19  PB2 (D  10)  TX1
+//     *(D  6) PA6  3|    |18  PB3 (D  11)*
+//     *(D  5) PA5  4|    |17  PC0 (D  12)*
+//      (D  4) PA4  5|    |16  PC1 (D  13)
+//      (D  3) PA3  6|    |15  PC2 (D  14)  INT0
+//      (D  2) PA2  7|    |14  PC3 (D  15) 
+//      (D  1) PA1  8|    |13  PC4 (D  16)
+//      (D  0) PA0  9|    |12  PC5 (D  17)
+//             GND 10|    |11  VCC
+//                   +----+
+//
+// * indicates PWM port
+
+// these arrays map port names (e.g. port B) to the
+// appropriate addresses for various functions (e.g. reading
+// and writing)
+const uint8_t PROGMEM port_to_mode_PGM[] = 
+{
+	NOT_A_PORT,
+	&DDRA,
+	&DDRB,
+	&DDRC,
+};
+
+const uint8_t PROGMEM port_to_output_PGM[] = 
+{
+	NOT_A_PORT,
+	&PORTA,
+	&PORTB,
+	&PORTC,
+};
+
+const uint8_t PROGMEM port_to_input_PGM[] = 
+{
+	NOT_A_PORT,
+	&PINA,
+	&PINB,
+	&PINC,
+};
+
+const uint8_t PROGMEM digital_pin_to_port_PGM[] = 
+{
+	PORT_A_ID, /* 0 */
+	PORT_A_ID,
+	PORT_A_ID,
+	PORT_A_ID,
+	PORT_A_ID,
+	PORT_A_ID,
+	PORT_A_ID,
+	PORT_A_ID,
+	PORT_B_ID, /* 8 */
+	PORT_B_ID,
+	PORT_B_ID,
+	PORT_B_ID,
+	PORT_C_ID,
+	PORT_C_ID,
+	PORT_C_ID, /* 14 */
+	PORT_C_ID,
+	PORT_C_ID,
+    PORT_C_ID,
+};
+
+const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] = 
+{
+	_BV(0), /* 0 */
+	_BV(1),
+	_BV(2),
+	_BV(3),
+	_BV(4),
+	_BV(5),
+	_BV(6),
+	_BV(7),
+	_BV(0), /* 8 */
+	_BV(1),
+	_BV(2),
+	_BV(3),
+	_BV(0),
+	_BV(1),
+	_BV(2), /* 14 */
+	_BV(3),
+	_BV(4),
+    _BV(5),
+};
+
+const uint8_t PROGMEM digital_pin_to_timer_PGM[] = 
+{
+	NOT_ON_TIMER, 
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	TIMER0B,
+	TIMER1B,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	TIMER1A,
+	TIMER0A,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+};
+
+#endif
 
 #if defined( __AVR_ATtinyX4__ )
 
