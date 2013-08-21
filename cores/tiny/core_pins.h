@@ -150,6 +150,66 @@
 #endif
 
 /*=============================================================================
+  Pin definitions for the ATtiny43U
+=============================================================================*/
+
+#if defined( __AVR_ATtiny43U__ )
+
+#define PIN_B0  ( 0)
+#define PIN_B1  ( 1)
+#define PIN_B2  ( 2)
+#define PIN_B3  ( 3)
+#define PIN_B4  ( 4)
+#define PIN_B5  ( 5)
+#define PIN_B6  ( 6)
+#define PIN_B7  ( 7)
+#define PIN_A0  ( 8)
+#define PIN_A1  ( 9)
+#define PIN_A2  (10)
+#define PIN_A3  (11)
+#define PIN_A4  (12)
+#define PIN_A5  (13)
+#define PIN_A6  (14)
+#define PIN_A7  (15)  /* RESET */
+
+#define CORE_DIGITAL_FIRST    (0)
+#define CORE_DIGITAL_LAST     (15)
+#define CORE_DIGITAL_COUNT    (CORE_DIGITAL_LAST-CORE_DIGITAL_FIRST+1)
+#define CORE_RESET_INCLUDED   (1)
+
+#define CORE_ANALOG_FIRST     (CORE_DIGITAL_LAST+1)
+#define CORE_ANALOG_COUNT     (4)
+#define CORE_ANALOG_LAST      (CORE_ANALOG_FIRST+CORE_ANALOG_COUNT-1)
+
+#define CORE_INT0_PIN  PIN_B7
+
+#define CORE_OC0A_PIN  PIN_B1
+#define CORE_OC0B_PIN  PIN_B2
+#define CORE_OC1A_PIN  PIN_B4
+#define CORE_OC1B_PIN  PIN_B5
+
+#define CORE_PWM0_PIN       CORE_OC0A_PIN
+#define CORE_PWM0_TIMER     0
+#define CORE_PWM0_CHANNEL   A
+
+#define CORE_PWM1_PIN       CORE_OC0B_PIN
+#define CORE_PWM1_TIMER     0
+#define CORE_PWM1_CHANNEL   B
+
+#define CORE_PWM2_PIN       CORE_OC1A_PIN
+#define CORE_PWM2_TIMER     1
+#define CORE_PWM2_CHANNEL   A
+
+#define CORE_PWM3_PIN       CORE_OC1B_PIN
+#define CORE_PWM3_TIMER     1
+#define CORE_PWM3_CHANNEL   B
+
+#define CORE_PWM_COUNT      (4)
+
+#endif
+
+
+/*=============================================================================
   Pin definitions for the ATtiny84
 =============================================================================*/
 

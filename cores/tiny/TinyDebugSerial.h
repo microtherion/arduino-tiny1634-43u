@@ -598,6 +598,11 @@ class TinyDebugSerialWriter_16_115200 : public TinyDebugSerialWriter
   #define TINY_DEBUG_SERIAL_REGISTER	0x18
   #define TINY_DEBUG_SERIAL_BIT			0
 
+#elif defined( __AVR_ATtiny43U__ )
+
+  #define TINY_DEBUG_SERIAL_REGISTER	0x18
+  #define TINY_DEBUG_SERIAL_BIT			0
+
 #elif defined( __AVR_ATtinyX4__ )
 
   #if F_CPU <= 8000000L

@@ -277,6 +277,115 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[] =
 
 #endif
 
+#if defined( __AVR_ATtiny43U__ )
+
+// On the Arduino board, digital pins are also used
+// for the analog output (software PWM).  Analog input
+// pins are a separate set.
+
+// ATMEL ATTINY43U
+//
+//                   +-\/-+
+//      (D  0) PB0  1|    |29  PA7 (D  15)     
+//     *(D  1) PB1  2|    |19  PA6 (D  14)     
+//     *(D  2) PB2  3|    |18  PA5 (D  13) 
+//      (D  3) PB3  4|    |17  PA4 (D  12) 
+//     *(D  4) PB4  5|    |16  PA3 (D  11)
+//     *(D  5) PB5  6|    |15  PA2 (D  10)      
+//      (D  6) PB6  7|    |14  PA1 (D   9) 
+// INT0 (D  7) PB7  8|    |13  PA0 (D   8)
+//             VCC  9|    |12  VBAT
+//             GND 10|    |11  LSW
+//                   +----+
+//
+// * indicates PWM port
+
+// these arrays map port names (e.g. port B) to the
+// appropriate addresses for various functions (e.g. reading
+// and writing)
+const uint8_t PROGMEM port_to_mode_PGM[] = 
+{
+	NOT_A_PORT,
+	&DDRA,
+	&DDRB,
+};
+
+const uint8_t PROGMEM port_to_output_PGM[] = 
+{
+	NOT_A_PORT,
+	&PORTA,
+	&PORTB,
+};
+
+const uint8_t PROGMEM port_to_input_PGM[] = 
+{
+	NOT_A_PORT,
+	&PINA,
+	&PINB,
+};
+
+const uint8_t PROGMEM digital_pin_to_port_PGM[] = 
+{
+	PORT_B_ID, /* 0 */
+	PORT_B_ID,
+	PORT_B_ID,
+	PORT_B_ID,
+	PORT_B_ID,
+	PORT_B_ID,
+	PORT_B_ID,
+	PORT_B_ID,
+	PORT_A_ID, /* 8 */
+	PORT_A_ID,
+	PORT_A_ID,
+	PORT_A_ID,
+	PORT_A_ID,
+	PORT_A_ID,
+	PORT_A_ID, /* 14 */
+	PORT_A_ID,
+};
+
+const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[] = 
+{
+	_BV(0), /* 0 */
+	_BV(1),
+	_BV(2),
+	_BV(3),
+	_BV(4),
+	_BV(5),
+	_BV(6),
+	_BV(7),
+	_BV(0), /* 8 */
+	_BV(1),
+	_BV(2),
+	_BV(3),
+	_BV(4),
+	_BV(5),
+	_BV(6), /* 14 */
+	_BV(7),
+};
+
+const uint8_t PROGMEM digital_pin_to_timer_PGM[] = 
+{
+	NOT_ON_TIMER, 
+	TIMER0A,
+	TIMER0B,
+	NOT_ON_TIMER,
+	TIMER1A,
+	TIMER1B,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+};
+
+#endif
+
 #if defined( __AVR_ATtinyX4__ )
 
 // ATMEL ATTINY84 / ARDUINO
