@@ -6,17 +6,17 @@
 
   This file is part of Arduino-Tiny.
 
-  Arduino-Tiny is free software: you can redistribute it and/or modify it 
-  under the terms of the GNU Lesser General Public License as published by 
+  Arduino-Tiny is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as published by
   the Free Software Foundation, either version 3 of the License, or (at your
   option) any later version.
 
-  Arduino-Tiny is distributed in the hope that it will be useful, but 
-  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+  Arduino-Tiny is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
   or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
   License for more details.
 
-  You should have received a copy of the GNU Lesser General Public License 
+  You should have received a copy of the GNU Lesser General Public License
   along with Arduino-Tiny.  If not, see <http://www.gnu.org/licenses/>.
 
 ==============================================================================*/
@@ -33,7 +33,7 @@
 
 
 /*=============================================================================
-  Macros for generating application specific names for the stuff here (like 
+  Macros for generating application specific names for the stuff here (like
   Millis_SetToPowerup as an alias for Timer1_SetToPowerup).
 =============================================================================*/
 
@@ -52,7 +52,7 @@
 
   - The 2313 and X4 Timer1 code is source code compatible (interchangeable).
     It's time to make the Timer1 code reusable.
-    
+
 =============================================================================*/
 
 /*=============================================================================
@@ -187,12 +187,12 @@ __attribute__((always_inline)) static inline void Timer0_SetOutputCompareMatchB(
 __attribute__((always_inline)) static inline void Timer0_EnableOutputCompareInterruptA( void )
 {
   TIMSK |= (1<<OCIE0A);
-} 
+}
 
 __attribute__((always_inline)) static inline void Timer0_EnableOverflowInterrupt( void )
 {
   TIMSK |= (1<<TOIE0);
-} 
+}
 
 __attribute__((always_inline)) static inline timer0_tcnt_t Timer0_GetCount( void )
 {
@@ -347,12 +347,12 @@ __attribute__((always_inline)) static inline void Timer1_SetOutputCompareMatchB(
 __attribute__((always_inline)) static inline void Timer1_EnableOutputCompareInterruptA( void )
 {
   TIMSK |= (1<<OCIE1A);
-} 
+}
 
 __attribute__((always_inline)) static inline void Timer1_EnableOverflowInterrupt( void )
 {
   TIMSK |= (1<<TOIE1);
-} 
+}
 
 __attribute__((always_inline)) static inline timer1_tcnt_t Timer1_GetCount( void )
 {
@@ -503,12 +503,12 @@ __attribute__((always_inline)) static inline void Timer0_SetOutputCompareMatchB(
 __attribute__((always_inline)) static inline void Timer0_EnableOutputCompareInterruptA( void )
 {
   TIMSK |= (1<<OCIE0A);
-} 
+}
 
 __attribute__((always_inline)) static inline void Timer0_EnableOverflowInterrupt( void )
 {
   TIMSK |= (1<<TOIE0);
-} 
+}
 
 __attribute__((always_inline)) static inline timer0_tcnt_t Timer0_GetCount( void )
 {
@@ -663,12 +663,12 @@ __attribute__((always_inline)) static inline void Timer1_SetOutputCompareMatchB(
 __attribute__((always_inline)) static inline void Timer1_EnableOutputCompareInterruptA( void )
 {
   TIMSK |= (1<<OCIE1A);
-} 
+}
 
 __attribute__((always_inline)) static inline void Timer1_EnableOverflowInterrupt( void )
 {
   TIMSK |= (1<<TOIE1);
-} 
+}
 
 __attribute__((always_inline)) static inline timer1_tcnt_t Timer1_GetCount( void )
 {
@@ -819,12 +819,12 @@ __attribute__((always_inline)) static inline void Timer0_SetOutputCompareMatchB(
 __attribute__((always_inline)) static inline void Timer0_EnableOutputCompareInterruptA( void )
 {
   TIMSK0 |= (1<<OCIE0A);
-} 
+}
 
 __attribute__((always_inline)) static inline void Timer0_EnableOverflowInterrupt( void )
 {
   TIMSK0 |= (1<<TOIE0);
-} 
+}
 
 __attribute__((always_inline)) static inline timer0_tcnt_t Timer0_GetCount( void )
 {
@@ -971,12 +971,12 @@ __attribute__((always_inline)) static inline void Timer1_SetOutputCompareMatchB(
 __attribute__((always_inline)) static inline void Timer1_EnableOutputCompareInterruptA( void )
 {
   TIMSK1 |= (1<<OCIE1A);
-} 
+}
 
 __attribute__((always_inline)) static inline void Timer1_EnableOverflowInterrupt( void )
 {
   TIMSK1 |= (1<<TOIE1);
-} 
+}
 
 __attribute__((always_inline)) static inline timer1_tcnt_t Timer1_GetCount( void )
 {
@@ -997,7 +997,7 @@ __attribute__((always_inline)) static inline uint8_t Timer1_IsOverflowSet( void 
 
 
 /*=============================================================================
-  Veneer for the two ATtiny84 timers
+  Veneer for the two ATtiny84 timers (and the third timer on ATtiny841)
 =============================================================================*/
 
 #if defined( __AVR_ATtinyX4__ )
@@ -1128,12 +1128,12 @@ __attribute__((always_inline)) static inline void Timer0_SetOutputCompareMatchB(
 __attribute__((always_inline)) static inline void Timer0_EnableOutputCompareInterruptA( void )
 {
   TIMSK0 |= (1<<OCIE0A);
-} 
+}
 
 __attribute__((always_inline)) static inline void Timer0_EnableOverflowInterrupt( void )
 {
   TIMSK0 |= (1<<TOIE0);
-} 
+}
 
 __attribute__((always_inline)) static inline timer0_tcnt_t Timer0_GetCount( void )
 {
@@ -1288,12 +1288,12 @@ __attribute__((always_inline)) static inline void Timer1_SetOutputCompareMatchB(
 __attribute__((always_inline)) static inline void Timer1_EnableOutputCompareInterruptA( void )
 {
   TIMSK1 |= (1<<OCIE1A);
-} 
+}
 
 __attribute__((always_inline)) static inline void Timer1_EnableOverflowInterrupt( void )
 {
   TIMSK1 |= (1<<TOIE1);
-} 
+}
 
 __attribute__((always_inline)) static inline timer1_tcnt_t Timer1_GetCount( void )
 {
@@ -1309,6 +1309,168 @@ __attribute__((always_inline)) static inline uint8_t Timer1_IsOverflowSet( void 
 {
   return( (TIFR1 & (1<<TOV1)) != 0 );
 }
+
+#ifdef __AVR_ATtinyX41__
+
+#define Timer2_OutputComparePinA  CORE_OC2A_PIN
+#define Timer2_OutputComparePinB  CORE_OC2B_PIN
+
+#define TIMER2_SUPPORTS_PHASE_CORRECT_PWM  (1)
+
+__attribute__((always_inline)) static inline void Timer2_SetToPowerup( void )
+{
+  // Turn off Input Capture Noise Canceler, Input Capture Edge Select on Falling, stop the clock
+  TCCR2B = (0<<ICNC2) | (0<<ICES2) | (0<<WGM23) | (0<<WGM22) | (0<<CS22) | (0<<CS21) | (0<<CS20);
+  // Disconnect the timer from the output pins, Set Waveform Generation Mode to Normal
+  TCCR2A = (0<<COM2A1) | (0<<COM2A0) | (0<<COM2B1) | (0<<COM2B0) | (0<<WGM21) | (0<<WGM20);
+  // Reset the count to zero
+  TCNT2 = 0;
+  // Set the output compare registers to zero
+  OCR2A = 0;
+  OCR2B = 0;
+  // Clear the input capture?
+  // ICR2 = 0;
+  // Disable all Timer2 interrupts
+  TIMSK2 &= ~MASK4(ICIE2,OCIE2B,OCIE2A,TOIE2);
+  // Clear the Timer2 interrupt flags
+  TIFR2 |= MASK4(ICF2,OCF2B,OCF2A,TOV2);
+}
+
+__attribute__((always_inline)) static inline void Timer2_InterruptsOff( void )
+{
+  TIMSK2 &= ~MASK4(ICIE2,OCIE2B,OCIE2A,TOIE2);
+}
+
+#define TIMER2_NUMBER_PRESCALERS  (5)
+
+#define TIMER2_PRESCALER_VALUE_1  (1)
+#define TIMER2_PRESCALER_VALUE_2  (8)
+#define TIMER2_PRESCALER_VALUE_3  (64)
+#define TIMER2_PRESCALER_VALUE_4  (256)
+#define TIMER2_PRESCALER_VALUE_5  (1024)
+
+typedef uint16_t timer2_prescale_value_t;
+
+typedef enum
+{
+  Timer2_Stopped               = B000,
+  Timer2_Prescale_Value_1      = B001,
+  Timer2_Prescale_Value_8      = B010,
+  Timer2_Prescale_Value_64     = B011,
+  Timer2_Prescale_Value_256    = B100,
+  Timer2_Prescale_Value_1024   = B101,
+  Timer2_T0_Falling            = B110,
+  Timer2_T0_Rising             = B111,
+  Timer2_Prescale_Index_1      = B001,
+  Timer2_Prescale_Index_2      = B010,
+  Timer2_Prescale_Index_3      = B011,
+  Timer2_Prescale_Index_4      = B100,
+  Timer2_Prescale_Index_5      = B101
+}
+timer2_cs_t;
+
+__attribute__((always_inline)) static inline void Timer2_ClockSelect( timer2_cs_t cs )
+{
+  TCCR2B = (TCCR2B & ~MASK3(CS22,CS21,CS20)) | (cs << CS20);
+}
+
+typedef enum
+{
+  Timer2_Normal                   = B0000,
+  Timer2_Phase_Correct_PWM_FF     = B0001,
+  Timer2_Phase_Correct_PWM_1FF    = B0010,
+  Timer2_Phase_Correct_PWM_3FF    = B0011,
+  Timer2_CTC_OCR                  = B0100,
+  Timer2_Fast_PWM_FF              = B0101,
+  Timer2_Fast_PWM_1FF             = B0110,
+  Timer2_Fast_PWM_3FF             = B0111,
+  Timer2_Phase_Frequency_PWM_ICR  = B1000,
+  Timer2_Phase_Frequency_PWM_OCR  = B1001,
+  Timer2_Phase_Correct_PWM_ICR    = B1010,
+  Timer2_Phase_Correct_PWM_OCR    = B1011,
+  Timer2_CTC_ICR                  = B1100,
+  Timer2_Reserved_1               = B1101,
+  Timer2_Fast_PWM_ICR             = B1110,
+  Timer2_Fast_PWM_OCR             = B1111
+}
+timer2_wgm_t;
+
+__attribute__((always_inline)) static inline void Timer2_SetWaveformGenerationMode( timer2_wgm_t wgm )
+{
+  TCCR2A = (TCCR2A & ~MASK2(WGM21,WGM20)) | (((wgm & B0011) >> 0) << WGM20);
+  TCCR2B = (TCCR2B & ~MASK2(WGM23,WGM22)) | (((wgm & B1100) >> 2) << WGM22);
+}
+
+typedef enum
+{
+  Timer2_Disconnected = 0,
+  Timer2_Toggle = B01,
+  Timer2_Clear  = B10,
+  Timer2_Set    = B11
+}
+timer2_com_t;
+
+__attribute__((always_inline)) static inline void Timer2_SetCompareOutputModeA( timer2_com_t com )
+{
+  TCCR2A = (TCCR2A & ~MASK2(COM2A1,COM2A0)) | (com << COM2A0);
+}
+
+__attribute__((always_inline)) static inline void Timer2_SetCompareOutputModeB( timer2_com_t com )
+{
+  TCCR2A = (TCCR2A & ~MASK2(COM2B1,COM2B0)) | (com << COM2B0);
+}
+
+__attribute__((always_inline)) static inline void Timer2_DisconnectOutputs( void )
+{
+  TCCR2A &= ~MASK4(COM2A1,COM2A0,COM2B1,COM2B0);
+}
+
+#define TIMER2_MAXIMUM_OCR        (65535)
+#define TIMER2_PRESCALE_SET       (1)
+
+typedef uint16_t timer2_ocr_t;
+typedef uint16_t timer2_tcnt_t;
+
+__attribute__((always_inline)) static inline void Timer2_SetOutputCompareMatchAndClear( timer2_ocr_t oc )
+{
+  OCR2A = oc;
+}
+
+__attribute__((always_inline)) static inline void Timer2_SetOutputCompareMatchA( timer2_ocr_t oc )
+{
+  OCR2A = oc;
+}
+
+__attribute__((always_inline)) static inline void Timer2_SetOutputCompareMatchB( timer2_ocr_t oc )
+{
+  OCR2B = oc;
+}
+
+__attribute__((always_inline)) static inline void Timer2_EnableOutputCompareInterruptA( void )
+{
+  TIMSK2 |= (1<<OCIE2A);
+}
+
+__attribute__((always_inline)) static inline void Timer2_EnableOverflowInterrupt( void )
+{
+  TIMSK2 |= (1<<TOIE2);
+}
+
+__attribute__((always_inline)) static inline timer2_tcnt_t Timer2_GetCount( void )
+{
+  return( TCNT2 );
+}
+
+__attribute__((always_inline)) static inline void Timer2_SetCount( timer2_tcnt_t v )
+{
+  TCNT2 = v;
+}
+
+__attribute__((always_inline)) static inline uint8_t Timer2_IsOverflowSet( void )
+{
+  return( (TIFR2 & (1<<TOV2)) != 0 );
+}
+#endif /* __AVR_ATtinyX41__ */
 
 #endif
 
@@ -1445,12 +1607,12 @@ __attribute__((always_inline)) static inline void Timer0_SetOutputCompareMatchB(
 __attribute__((always_inline)) static inline void Timer0_EnableOutputCompareInterruptA( void )
 {
   TIMSK |= (1<<OCIE0A);
-} 
+}
 
 __attribute__((always_inline)) static inline void Timer0_EnableOverflowInterrupt( void )
 {
   TIMSK |= (1<<TOIE0);
-} 
+}
 
 __attribute__((always_inline)) static inline timer0_tcnt_t Timer0_GetCount( void )
 {
@@ -1641,12 +1803,12 @@ __attribute__((always_inline)) static inline void Timer1_SetOutputCompareMatchB(
 __attribute__((always_inline)) static inline void Timer1_EnableOutputCompareInterruptA( void )
 {
   TIMSK |= (1<<OCIE1A);
-} 
+}
 
 __attribute__((always_inline)) static inline void Timer1_EnableOverflowInterrupt( void )
 {
   TIMSK |= (1<<TOIE1);
-} 
+}
 
 __attribute__((always_inline)) static inline timer1_tcnt_t Timer1_GetCount( void )
 {
@@ -1667,7 +1829,7 @@ __attribute__((always_inline)) static inline uint8_t Timer1_IsOverflowSet( void 
 
 
 /*=============================================================================
-  Aliases for the interrupt service routine vector numbers so the code 
+  Aliases for the interrupt service routine vector numbers so the code
   doesn't have to be riddled with #ifdefs.
 =============================================================================*/
 

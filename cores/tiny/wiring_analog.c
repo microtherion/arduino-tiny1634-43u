@@ -122,7 +122,25 @@ void analogWrite(uint8_t pin, int val)
     #endif
 
     #if CORE_PWM_COUNT >= 5
-    #error Only 4 PWM pins are supported.  Add more conditions.
+      if ( pin == CORE_PWM4_PIN )
+      {
+        Pwm3_SetCompareOutputMode( Pwm4_Clear );
+        Pwm3_SetOutputCompareMatch( val );
+      }
+      else
+    #endif
+
+    #if CORE_PWM_COUNT >= 6
+      if ( pin == CORE_PWM5_PIN )
+      {
+        Pwm3_SetCompareOutputMode( Pwm5_Clear );
+        Pwm3_SetOutputCompareMatch( val );
+      }
+      else
+    #endif
+
+    #if CORE_PWM_COUNT >= 7
+    #error Only 6 PWM pins are supported.  Add more conditions.
     #endif
 
     {

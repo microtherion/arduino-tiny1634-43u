@@ -93,7 +93,7 @@ ISR(MILLISTIMER_OVF_vect)
 
   f += FRACT_INC;
 
-  if (f >= FRACT_MAX) 
+  if (f >= FRACT_MAX)
   {
     f -= FRACT_MAX;
     m = m + MILLIS_INC + 1;
@@ -122,20 +122,20 @@ unsigned long millis()
   return m;
 }
 
-unsigned long micros() 
+unsigned long micros()
 {
   unsigned long m;
   uint8_t oldSREG = SREG, t;
-  
+
   cli();
   m = millis_timer_overflow_count;
   t = MillisTimer_GetCount();
-  
+
   if (MillisTimer_IsOverflowSet() && (t < 255))
     m++;
 
   SREG = oldSREG;
-  
+
   return ((m << 8) + t) * (MillisTimer_Prescale_Value / clockCyclesPerMicrosecond());
 }
 
@@ -188,7 +188,7 @@ void delayMicroseconds(unsigned int us)
   // per iteration, so execute it twice for each microsecond of
   // delay requested.
   us <<= 1;
-    
+
   // partially compensate for the time taken by the preceeding commands.
   // we can't subtract any more than this or we'd overflow w/ small delays.
   us--;
@@ -250,6 +250,14 @@ void init(void)
   // Initialize the timer used for Tone
   #if defined( INITIALIZE_SECONDARY_TIMERS ) && INITIALIZE_SECONDARY_TIMERS
     initToneTimerInternal();
+	#ifdef  __AVR_ATtinyX41__
+	  Timer2_ClockSelect(Timer2_Stopped);
+	  TOCPMSA1 = B00000101;	// TOCC7 = OC0A, TOCC6 = OC0B, TOCC5 = OC1A, TOCC4 = OC2B
+	  TOCPMSA0 = B10100000; // TOCC3 = OC2A, TOCC2 = OC2B
+	  TOCPMCOE = B11111100; // Potentially enable TOCC7-2
+	  Timer2_SetWaveformGenerationMode(Timer2_Phase_Correct_PWM_FF);
+	  Timer2_ClockSelect(Timer2_Prescale_Value_64);
+	#endif
   #endif
 
   // Initialize the ADC
@@ -258,4 +266,3 @@ void init(void)
     ADC_Enable();
   #endif
 }
-

@@ -6,17 +6,17 @@
 
   This file is part of Arduino-Tiny.
 
-  Arduino-Tiny is free software: you can redistribute it and/or modify it 
-  under the terms of the GNU Lesser General Public License as published by 
+  Arduino-Tiny is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as published by
   the Free Software Foundation, either version 3 of the License, or (at your
   option) any later version.
 
-  Arduino-Tiny is distributed in the hope that it will be useful, but 
-  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+  Arduino-Tiny is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
   or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
   License for more details.
 
-  You should have received a copy of the GNU Lesser General Public License 
+  You should have received a copy of the GNU Lesser General Public License
   along with Arduino-Tiny.  If not, see <http://www.gnu.org/licenses/>.
 
 ==============================================================================*/
@@ -59,7 +59,21 @@
 #endif
 
 #if CORE_PWM_COUNT >= 5
-#error Only 4 pins PWM are supported.  Add more macro defintions.
+#define Pwm4_SetCompareOutputMode                 PwmTimer3_( CORE_PWM4_TIMER, SetCompareOutputMode, CORE_PWM4_CHANNEL )
+#define Pwm4_Disconnected                         PwmTimer2_( CORE_PWM4_TIMER, Disconnected )
+#define Pwm4_Clear                                PwmTimer2_( CORE_PWM4_TIMER, Clear )
+#define Pwm4_SetOutputCompareMatch                PwmTimer3_( CORE_PWM4_TIMER, SetOutputCompareMatch, CORE_PWM4_CHANNEL )
+#endif
+
+#if CORE_PWM_COUNT >= 6
+#define Pwm5_SetCompareOutputMode                 PwmTimer3_( CORE_PWM5_TIMER, SetCompareOutputMode, CORE_PWM5_CHANNEL )
+#define Pwm5_Disconnected                         PwmTimer2_( CORE_PWM5_TIMER, Disconnected )
+#define Pwm5_Clear                                PwmTimer2_( CORE_PWM5_TIMER, Clear )
+#define Pwm5_SetOutputCompareMatch                PwmTimer3_( CORE_PWM5_TIMER, SetOutputCompareMatch, CORE_PWM5_CHANNEL )
+#endif
+
+#if CORE_PWM_COUNT >= 7
+#error Only 6 pins PWM are supported.  Add more macro defintions.
 #endif
 
 #endif

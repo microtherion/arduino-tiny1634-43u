@@ -6,17 +6,17 @@
 
   This file is part of Arduino-Tiny.
 
-  Arduino-Tiny is free software: you can redistribute it and/or modify it 
-  under the terms of the GNU Lesser General Public License as published by 
+  Arduino-Tiny is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as published by
   the Free Software Foundation, either version 3 of the License, or (at your
   option) any later version.
 
-  Arduino-Tiny is distributed in the hope that it will be useful, but 
-  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+  Arduino-Tiny is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
   or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
   License for more details.
 
-  You should have received a copy of the GNU Lesser General Public License 
+  You should have received a copy of the GNU Lesser General Public License
   along with Arduino-Tiny.  If not, see <http://www.gnu.org/licenses/>.
 
 ==============================================================================*/
@@ -260,7 +260,22 @@
 #define CORE_PWM3_TIMER     1
 #define CORE_PWM3_CHANNEL   B
 
+#if defined( __AVR_ATtinyX41__ )
+#define CORE_OC2A_PIN  PIN_A4
+#define CORE_OC2B_PIN  PIN_A3
+
+#define CORE_PWM4_PIN       CORE_OC2A_PIN
+#define CORE_PWM4_TIMER     2
+#define CORE_PWM4_CHANNEL   A
+
+#define CORE_PWM5_PIN       CORE_OC2B_PIN
+#define CORE_PWM5_TIMER     2
+#define CORE_PWM5_CHANNEL   B
+
+#define CORE_PWM_COUNT      (6)
+#else
 #define CORE_PWM_COUNT      (4)
+#endif
 
 #endif
 
@@ -294,9 +309,9 @@
 #define CORE_OC1A_PIN  PIN_B1
 #define CORE_OC1B_PIN  PIN_B4
 
-/* Note: By default, CORE_OC1A_PIN is not used for PWM.  It overlaps with 
+/* Note: By default, CORE_OC1A_PIN is not used for PWM.  It overlaps with
 CORE_OC0B_PIN.  CORE_OC0B_PIN was used because it supports phase-correct PWM.
-There is a build option in "core_build_options.h" to determine which channel 
+There is a build option in "core_build_options.h" to determine which channel
 to use */
 
 #define CORE_PWM0_PIN       CORE_OC0A_PIN
