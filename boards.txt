@@ -743,3 +743,26 @@ attiny43uat1.build.core=tiny
 # attiny43uat1.build.core=empty
  
 ###########################################################################
+attiny10at1.name=ATtiny10 @ 1 MHz
+
+attiny10at1.upload.maximum_size=1024
+ 
+attiny10at1.bootloader.low_fuses=0xFF
+attiny10at1.bootloader.path=empty
+attiny10at1.bootloader.file=empty10.hex
+
+attiny10at1.build.mcu=attiny10
+attiny10at1.build.f_cpu=1000000L
+attiny10at1.build.core=empty
+###########################################################################
+attiny10at8.name=ATtiny10 @ 8 MHz
+
+attiny10at8.upload.maximum_size=1024
+ 
+attiny10at8.bootloader.low_fuses=0xFF
+attiny10at8.bootloader.path=empty
+attiny10at8.bootloader.file=empty10.hex
+
+attiny10at8.build.mcu=attiny10
+attiny10at8.build.f_cpu=8000000L
+attiny10at8.build.core=empty
