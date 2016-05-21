@@ -149,7 +149,7 @@
 
 #define HAVE_ADC                                  1
 
-#define __AVR_ATtinyX41__
+#ifdef __AVR_ATtinyX41__
 #define DEFAULT_TO_TINY_DEBUG_SERIAL              0
 #else
 #define DEFAULT_TO_TINY_DEBUG_SERIAL              1

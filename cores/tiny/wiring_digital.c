@@ -43,7 +43,7 @@ void pinMode(uint8_t pin, uint8_t mode)
 	reg = portModeRegister(port);
   out = portOutputRegister(port);
 
-	if (mode == INPUT) { 
+	if (mode == INPUT) {
 		uint8_t oldSREG = SREG;
     cli();
 		*reg &= ~bit;
@@ -105,7 +105,23 @@ __attribute__((always_inline)) static inline void turnOffPWM( uint8_t pin )
   #endif
 
   #if CORE_PWM_COUNT >= 5
-  #error Only 4 PWM pins are supported.  Add more conditions.
+    if ( pin == CORE_PWM4_PIN )
+    {
+      Pwm4_SetCompareOutputMode( Pwm4_Disconnected );
+    }
+    else
+  #endif
+
+  #if CORE_PWM_COUNT >= 6
+    if ( pin == CORE_PWM5_PIN )
+    {
+      Pwm5_SetCompareOutputMode( Pwm5_Disconnected );
+    }
+    else
+  #endif
+
+  #if CORE_PWM_COUNT >= 7
+  #error Only 6 PWM pins are supported.  Add more conditions.
   #endif
 
     {

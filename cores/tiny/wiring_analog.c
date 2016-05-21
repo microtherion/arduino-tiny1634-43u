@@ -124,8 +124,8 @@ void analogWrite(uint8_t pin, int val)
     #if CORE_PWM_COUNT >= 5
       if ( pin == CORE_PWM4_PIN )
       {
-        Pwm3_SetCompareOutputMode( Pwm4_Clear );
-        Pwm3_SetOutputCompareMatch( val );
+        Pwm4_SetCompareOutputMode( Pwm4_Clear );
+        Pwm4_SetOutputCompareMatch( val );
       }
       else
     #endif
@@ -133,8 +133,8 @@ void analogWrite(uint8_t pin, int val)
     #if CORE_PWM_COUNT >= 6
       if ( pin == CORE_PWM5_PIN )
       {
-        Pwm3_SetCompareOutputMode( Pwm5_Clear );
-        Pwm3_SetOutputCompareMatch( val );
+        Pwm5_SetCompareOutputMode( Pwm5_Clear );
+        Pwm5_SetOutputCompareMatch( val );
       }
       else
     #endif

@@ -6,17 +6,17 @@
 
   This file is part of Arduino-Tiny.
 
-  Arduino-Tiny is free software: you can redistribute it and/or modify it 
-  under the terms of the GNU Lesser General Public License as published by 
+  Arduino-Tiny is free software: you can redistribute it and/or modify it
+  under the terms of the GNU Lesser General Public License as published by
   the Free Software Foundation, either version 3 of the License, or (at your
   option) any later version.
 
-  Arduino-Tiny is distributed in the hope that it will be useful, but 
-  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY 
+  Arduino-Tiny is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
   or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public
   License for more details.
 
-  You should have received a copy of the GNU Lesser General Public License 
+  You should have received a copy of the GNU Lesser General Public License
   along with Arduino-Tiny.  If not, see <http://www.gnu.org/licenses/>.
 
 ==============================================================================*/
@@ -38,8 +38,8 @@
 #if defined( __AVR_ATtinyX4__ ) || defined( __AVR_ATtinyX5__ ) || defined( __AVR_ATtiny1634__ ) || defined( __AVR_ATtiny43U__ )
 
 /*
-  From the '84 and '85 datasheets... By default, the successive approximation 
-  circuitry requires an input clock frequency between 50 kHz and 200 kHz to 
+  From the '84 and '85 datasheets... By default, the successive approximation
+  circuitry requires an input clock frequency between 50 kHz and 200 kHz to
   get maximum resolution.
 */
 #if F_CPU == 16000000
@@ -210,6 +210,42 @@ __attribute__((always_inline)) static inline uint16_t ADC_GetDataRegister( void 
 
 #if defined( __AVR_ATtinyX4__ )
 
+#ifdef __AVR_ATtinyX41__
+
+typedef enum
+{
+  ADC_Reference_VCC                             = B000,
+  ADC_Reference_Internal_1p1                    = B001,
+  ADC_Reference_Internal_2p2                    = B010,
+  ADC_Reference_Internal_4p096                  = B011,
+  ADC_Reference_External                        = B100,
+  ADC_Reference_Internal_1p1_aref               = B101,
+  ADC_Reference_Internal_2p2_aref               = B110,
+  ADC_Reference_Internal_4p096_aref             = B111,
+}
+adc_vr_t;
+
+__attribute__((always_inline)) static inline void ADC_SetVoltageReference( adc_vr_t vr )
+{
+   ADMUXB = (ADMUXB & ~MASK3(REFS2,REFS1,REFS0)) | (((vr & B111) >> 0) << REFS0);
+}
+
+typedef enum
+{
+  ADC_Gain_1		= B00,
+  ADC_Gain_20		= B01,
+  ADC_Gain_100		= B10,
+  ADC_Gain_Reserved	= B11,
+}
+adc_gain_t;
+
+__attribute__((always_inline)) static inline void ADC_SetDifferentialGain( adc_gain_t gain )
+{
+  ADMUXB = (ADMUXB & ~MASK2(GSEL1,GSEL0)) | (((gain & B11) >> 0) << GSEL0);
+}
+
+#else
+
 typedef enum
 {
   ADC_Reference_VCC                             = B00,
@@ -223,6 +259,7 @@ __attribute__((always_inline)) static inline void ADC_SetVoltageReference( adc_v
 {
   ADMUX = (ADMUX & ~MASK2(REFS1,REFS0)) | (((vr & B11) >> 0) << REFS0);
 }
+#endif
 
 typedef enum
 {
@@ -297,7 +334,11 @@ adc_ic_t;
 
 __attribute__((always_inline)) static inline void ADC_SetInputChannel( adc_ic_t ic )
 {
-  ADMUX = (ADMUX & ~MASK6(MUX5,MUX4,MUX3,MUX2,MUX1,MUX0)) | (ic << MUX0);
+#ifdef __AVR_ATtinyX41__
+	ADMUXA = (ADMUXA & ~MASK6(MUX5,MUX4,MUX3,MUX2,MUX1,MUX0)) | (ic << MUX0);
+#else
+	ADMUX = (ADMUX & ~MASK6(MUX5,MUX4,MUX3,MUX2,MUX1,MUX0)) | (ic << MUX0);
+#endif
 }
 
 __attribute__((always_inline)) static inline void ADC_StartConversion( void )
@@ -337,8 +378,8 @@ adc_vr_t;
 
 __attribute__((always_inline)) static inline void ADC_SetVoltageReference( adc_vr_t vr )
 {
-  ADMUX = (ADMUX & ~MASK3(REFS1,REFS0,REFS2)) 
-      | (((vr & B011) >> 0) << REFS0) 
+  ADMUX = (ADMUX & ~MASK3(REFS1,REFS0,REFS2))
+      | (((vr & B011) >> 0) << REFS0)
       | (((vr & B100) >> 2) << REFS2);
 }
 

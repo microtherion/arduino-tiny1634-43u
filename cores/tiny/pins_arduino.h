@@ -67,6 +67,11 @@
 #define TIMER1A 3
 #define TIMER1B 4
 
+#if defined( __AVR_ATtinyX41__ )
+#define TIMER2A	5
+#define TIMER2B 6
+#endif
+
 //changed it to uint16_t to uint8_t
 extern const uint8_t PROGMEM port_to_mode_PGM[];
 extern const uint8_t PROGMEM port_to_input_PGM[];
