@@ -234,7 +234,11 @@
 #define CORE_RESET_INCLUDED   (1)
 
 #define CORE_ANALOG_FIRST     (CORE_DIGITAL_LAST+1)
+#if defined( __AVR_ATtinyX41__ )
+#define CORE_ANALOG_COUNT     (12)
+#else
 #define CORE_ANALOG_COUNT     (8)
+#endif
 #define CORE_ANALOG_LAST      (CORE_ANALOG_FIRST+CORE_ANALOG_COUNT-1)
 
 #define CORE_INT0_PIN  PIN_B2

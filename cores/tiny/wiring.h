@@ -44,7 +44,7 @@ extern "C"{
 #define INPUT 0x0
 #define OUTPUT 0x1
 #define INPUT_PULLUP 0x2
-  
+
 #define true 0x1
 #define false 0x0
 
@@ -78,14 +78,14 @@ extern "C"{
 /* rmv
 analogReference constants for ATmega168.  These are NOT correct for the ATtiny84 nor for the ATtiny85.  The correct values are below.
 
-// Internal 1.1V Voltage Reference with external capacitor at AREF pin 
-#define INTERNAL 3  
+// Internal 1.1V Voltage Reference with external capacitor at AREF pin
+#define INTERNAL 3
 
-// AVCC with external capacitor at AREF pin 
-#define DEFAULT 1   
+// AVCC with external capacitor at AREF pin
+#define DEFAULT 1
 
-// AREF, Internal Vref turned off 
-#define EXTERNAL 0  
+// AREF, Internal Vref turned off
+#define EXTERNAL 0
 */
 
 
@@ -111,6 +111,29 @@ analogReference constants for ATmega168.  These are NOT correct for the ATtiny84
 
 // Internal 1.1V voltage reference
 #define INTERNAL (1)
+
+#elif defined( __AVR_ATtinyX41__ )
+
+// VCC used as analog reference, disconnected from PA0 (AREF)
+#define DEFAULT (0)
+
+// External voltage reference at PA0 (AREF) pin, internal reference turned off
+#define EXTERNAL (4)
+
+// Internal 1.1V voltage reference
+#define INTERNAL (1)
+#define INTERNAL1V1 INTERNAL
+
+// Internal 2.2V voltage reference
+#define INTERNAL2V2	(2)
+
+// Internal 4.096V voltage reference
+#define INTERNAL4V096 (3)
+
+// Internal references with bypass capacitors
+#define INTERNAL1V1_AREF 	(5)
+#define INTERNAL2V2_AREF 	(6)
+#define INTERNAL4V096_AREF 	(7)
 
 #elif defined( __AVR_ATtinyX4__ )
 
